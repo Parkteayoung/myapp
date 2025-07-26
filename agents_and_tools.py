@@ -6,6 +6,18 @@ import requests
 #시간 라이브러리
 from datetime import datetime
 
+from dotenv import load_dotenv
+import os
+
+# .env 파일에서 환경 변수 로드
+load_dotenv()
+
+# API 키 가져오기
+KAKAO_API_KEY = os.getenv('KAKAO_API_KEY')
+WEATHER_API_KEY = os.getenv('WEATHER_API_KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
+
 def print_something():
     print(f'LOL@2:)')
 
@@ -13,14 +25,12 @@ def print_something():
 #일반적인 의도 파악 및 메시지를 작성
 llm = ChatOpenAI(
     model = 'gpt-4o-mini',
-    api_key= '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',
     temperature= 0.3,
     model_kwargs ={'response_format' : {'type':'json_object'}}
 )
 
 llm2 = ChatOpenAI(
     model = 'gpt-4o-mini',
-    api_key= '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',
     temperature= 0.3
 )
 
@@ -173,7 +183,6 @@ def recommend_food(state : dict) -> dict:
 #현재 날씨를 가져옴(api를 활용)
 def get_weather(state : dict) -> dict :
     
-    WEATHER_API_KEY = '17c9ba52f1e3f35c690c4cace7c2cd2a'
     
     #날씨 정보를 물어볼 인터넷 api주소
     url = "https://api.openweathermap.org/data/2.5/weather"
@@ -299,7 +308,6 @@ def search_place(state : dict) -> dict:
     
     url = "https://dapi.kakao.com/v2/local/search/keyword.json"
     
-    KAKAO_API_KEY= '09261631a38cf08c322be2b556fbe93c'
     #kakao api key가 들어감
     headers ={
         'Authorization' : f'KakaoAK {KAKAO_API_KEY}' # KakaoAK 뒤 한 칸 띄워야 오류가 안남 
