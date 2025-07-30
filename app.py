@@ -57,7 +57,7 @@ if submit:
            
            for i, e in enumerate(events):
                st.markdown(f'Step{i+1} : {list(e.keys())[0]}')
-               st.join(e)
+               st.write(e)
                
        except Exception as e:
            st.error(f'오류 발생 : {str(e)}')
